@@ -35,4 +35,18 @@ df3.write \
     .mode('overwrite') \
     .csv(path='s3a://cubito/output', sep=',')
 
+df3 = spark.read.option("delimiter", ",") \
+    .option("encoding", "UTF-8") \
+    .csv("../spark-data/json/tablapostgres/*")
+
+df3.show()
+
+df3.write \
+    .option('fs.s3a.committer.name', 'partitioned') \
+    .option('fs.s3a.committer.staging.conflict-mode', 'replace') \
+    .option("fs.s3a.fast.upload.buffer", "bytebuffer") \
+    .mode('overwrite') \
+    .csv(path='s3a://cubito/basededatos', sep=',')
+
+
 spark.stop()

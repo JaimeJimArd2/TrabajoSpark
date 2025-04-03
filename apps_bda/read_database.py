@@ -35,11 +35,8 @@ def read_from_postgres():
         
         df.sort(asc("store_name")) \
         .write \
-        .option('fs.s3a.committer.name', 'partitioned') \
-        .option('fs.s3a.committer.staging.conflict-mode', 'replace') \
-        .option("fs.s3a.fast.upload.buffer", "bytebuffer")\
         .mode('overwrite') \
-        .csv(path='s3a://cubito/basededatos', sep=',')
+        .csv(path='/opt/spark-data/json/tablapostgres', sep=',')
 
 
     except Exception as e:

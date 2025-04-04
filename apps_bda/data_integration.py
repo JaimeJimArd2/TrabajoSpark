@@ -45,6 +45,7 @@ df3.write \
     .option('fs.s3a.committer.name', 'partitioned') \
     .option('fs.s3a.committer.staging.conflict-mode', 'replace') \
     .option("fs.s3a.fast.upload.buffer", "bytebuffer") \
+    .option("header", "true") \
     .mode('overwrite') \
     .csv(path='s3a://cubito/basededatos', sep=',')
 
